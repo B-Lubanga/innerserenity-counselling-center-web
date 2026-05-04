@@ -1,0 +1,78 @@
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: innerserenity-postgres
+    environment:
+      POSTGRES_USER: innerserenity
+      POSTGRES_PASSWORD: innerserenity_password
+      POSTGRES_DB: innerserenity
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U innerserenity -d innerserenity"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: innerserenity-backend
+    environment:
+      DATABASE_URL: postgresql://innerserenity:innerserenity_password@postgres:5432/innerserenity
+      SECRET_KEY: your-secret-key-here-change-in-production
+      ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 30
+      REFRESH_TOKEN_EXPIRE_DAYS: 7
+      FRONTEND_URL: http://localhost:3000
+      API_V1_PREFIX: /api
+      GOOGLE_CLIENT_ID: your-google-client-id
+      GOOGLE_CLIENT_SECRET: your-google-client-secret
+      SMTP_SERVER: smtp.gmail.com
+      SMTP_PORT: 587
+      SMTP_USERNAME: your-email@gmail.com
+      SMTP_PASSWORD: your-app-password
+      FROM_EMAIL: your-email@gmail.com
+      # FastAPI Mail Configuration
+      # TODO: Set up Gmail App Password or use SendGrid/Resend for production
+      MAIL_USERNAME: your-email@gmail.com
+      MAIL_PASSWORD: your-app-password
+      MAIL_FROM: noreply@innerserenity.co.ke
+      MAIL_FROM_NAME: Inner Serenity Counselling Centre
+      MAIL_SERVER: smtp.gmail.com
+      MAIL_PORT: 587
+      MAIL_STARTTLS: True
+      MAIL_SSL_TLS: False
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - /app/__pycache__
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: innerserenity-frontend
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    command: npm run dev
+
+volumes:
+  postgres_data:

@@ -1,0 +1,67 @@
+{% extends "base_email.html" %}
+
+{% block content %}
+<h1>
+    <span class="check-icon">✅</span>
+    Your Session is Confirmed!
+</h1>
+
+<p>Dear {{ client_name }},</p>
+
+<p>Thank you for booking your counselling session with Inner Serenity Counselling Centre. Your appointment has been confirmed and we look forward to supporting you on your journey to inner peace.</p>
+
+<div class="info-card">
+    <h4>Booking Details</h4>
+    <p>
+        <strong>Client Name:</strong> {{ client_name }}<br>
+        <strong>Service:</strong> {{ service_type }}<br>
+        <strong>Date:</strong> {{ session_date }}<br>
+        <strong>Time:</strong> {{ session_time }}<br>
+        <strong>Duration:</strong> {{ duration }} minutes<br>
+        <strong>Counsellor:</strong> {{ counsellor }}<br>
+        <strong>Booking Reference:</strong> #{{ booking_reference }}
+    </p>
+</div>
+
+<h2>
+    <span class="location-icon">📍</span>
+    In-Person Session
+</h2>
+
+<div class="info-card">
+    <h4>Location</h4>
+    <p>
+        <strong>Address:</strong> {{ office_address }}<br>
+        Please arrive 5-10 minutes before your appointment to allow time for check-in.
+    </p>
+</div>
+
+<h2>What to Bring</h2>
+
+<p>To make the most of your session, we recommend bringing:</p>
+
+<ul>
+    <li>A notepad if you'd like to take notes</li>
+    <li>Any previous session notes or relevant documents</li>
+    <li>A bottle of water</li>
+</ul>
+
+<h2>Cancellation Policy</h2>
+
+<p>To reschedule or cancel your appointment, please contact us at least 24 hours before your session. This allows us to offer the time slot to others who may be in need of support.</p>
+
+<h2>Contact Information</h2>
+
+<p>If you have any questions or need to make changes to your appointment, please don't hesitate to contact us:</p>
+
+<ul>
+    <li><strong>Phone:</strong> <a href="tel:+254700000000">+254 700 000 000</a></li>
+    <li><strong>Email:</strong> <a href="mailto:info@innerserenity.co.ke">info@innerserenity.co.ke</a></li>
+    <li><strong>WhatsApp:</strong> <a href="https://wa.me/254700000000">Send us a message</a></li>
+</ul>
+
+<p>We look forward to seeing you soon and supporting you on your journey to inner peace and wellbeing.</p>
+
+<p>With warmth and compassion,<br>
+<strong>{{ counsellor }} and the Inner Serenity Team</strong></p>
+{% endblock %}

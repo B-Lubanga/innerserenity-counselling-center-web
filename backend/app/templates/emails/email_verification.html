@@ -1,0 +1,53 @@
+{% extends "base_email.html" %}
+
+{% block content %}
+<h1>Welcome to Inner Serenity Counselling Centre, {{ first_name }}!</h1>
+
+<p>Thank you for choosing Inner Serenity Counselling Centre for your mental health and wellbeing journey. We're honored to be part of your path to inner peace.</p>
+
+<p>To complete your registration and activate your account, please verify your email address by clicking the button below:</p>
+
+<p>
+    <a href="{{ verify_url }}" class="btn btn-fern">Verify My Email →</a>
+</p>
+
+<p><strong>Why email verification matters:</strong></p>
+<ul>
+    <li>Ensures the security of your account</li>
+    <li>Allows you to receive important booking confirmations</li>
+    <li>Enables password reset functionality</li>
+    <li>Helps us communicate important updates about your sessions</li>
+</ul>
+
+<p><strong>Important:</strong></p>
+<ul>
+    <li>This verification link will expire in 24 hours</li>
+    <li>If you don't verify within this time, you'll need to request a new verification email</li>
+    <li>Make sure to check your spam folder if you don't see this email in your inbox</li>
+</ul>
+
+<p><strong>What happens after verification?</strong></p>
+<p>Once you verify your email, you'll be able to:</p>
+<ul>
+    <li>Book counselling sessions with our professional counsellors</li>
+    <li>Manage your appointments and view your booking history</li>
+    <li>Receive session reminders and confirmations</li>
+    <li>Access our secure client portal</li>
+</ul>
+
+<p><strong>Having trouble?</strong></p>
+<p>If you didn't create an account with us, or if you're having trouble with the verification process, please don't hesitate to reach out:</p>
+
+<ul>
+    <li><strong>Email:</strong> <a href="mailto:info@innerserenity.co.ke">info@innerserenity.co.ke</a></li>
+    <li><strong>Phone:</strong> <a href="tel:+254700000000">+254 700 000 000</a></li>
+    <li><strong>WhatsApp:</strong> <a href="https://wa.me/254700000000">Send us a message</a></li>
+</ul>
+
+<p>We're committed to providing you with a safe, confidential, and supportive environment for your mental health journey. Our team of professional counsellors is here to help you navigate life's challenges and find your path to inner peace.</p>
+
+<p>Thank you for trusting us with your care. We look forward to supporting you on your journey.</p>
+
+<p>With warmth and welcome,<br>
+<strong>The Inner Serenity Team</strong></p>
+{% endblock %}
