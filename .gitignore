@@ -27,3 +27,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# Dependencies & build artifacts
+frontend/node_modules/
+frontend/.next/
+backend/__pycache__/
+backend/.pytest_cache/
+database/exports/
+*.pyc
+*.pyo
