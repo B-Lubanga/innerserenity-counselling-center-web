@@ -1,0 +1,80 @@
+{% extends "base_email.html" %}
+
+{% block content %}
+<h1>
+    <span class="check-icon">✅</span>
+    Your Virtual Session is Confirmed!
+</h1>
+
+<p>Dear {{ client_name }},</p>
+
+<p>Thank you for booking your virtual counselling session with Inner Serenity Counselling Centre. Your online appointment has been confirmed and we look forward to supporting you on your journey to inner peace from the comfort of your own space.</p>
+
+<div class="info-card">
+    <h4>Booking Details</h4>
+    <p>
+        <strong>Client Name:</strong> {{ client_name }}<br>
+        <strong>Service:</strong> {{ service_type }}<br>
+        <strong>Date:</strong> {{ session_date }}<br>
+        <strong>Time:</strong> {{ session_time }}<br>
+        <strong>Duration:</strong> {{ duration }} minutes<br>
+        <strong>Counsellor:</strong> {{ counsellor }}<br>
+        <strong>Booking Reference:</strong> #{{ booking_reference }}
+    </p>
+</div>
+
+<h2>
+    <span class="location-icon">💻</span>
+    Online Session via Video Call
+</h2>
+
+<div class="info-card">
+    <h4>Meeting Link</h4>
+    <p>
+        <a href="{{ meeting_url }}" class="btn btn-apricot">Join Your Session →</a>
+    </p>
+    <p>Your meeting link will be active 10 minutes before your session time. The link above is unique to your session - please do not share it with others.</p>
+</div>
+
+<h2>Technical Tips</h2>
+
+<p>To ensure the best experience for your virtual session, please:</p>
+
+<ul>
+    <li>Test your camera and microphone beforehand</li>
+    <li>Find a quiet, private space where you won't be interrupted</li>
+    <li>Ensure you have a stable internet connection</li>
+    <li>Use Chrome or Firefox browsers for best results</li>
+    <li>Close unnecessary tabs and applications to improve performance</li>
+</ul>
+
+<h2>What to Prepare</h2>
+
+<p>To make the most of your session, we recommend having:</p>
+
+<ul>
+    <li>A notepad and pen for taking notes</li>
+    <li>Any previous session notes or relevant documents</li>
+    <li>A glass of water</li>
+    <li>Headphones for better audio quality (optional)</li>
+</ul>
+
+<h2>Cancellation Policy</h2>
+
+<p>To reschedule or cancel your appointment, please contact us at least 24 hours before your session. This allows us to offer the time slot to others who may be in need of support.</p>
+
+<h2>Contact Information</h2>
+
+<p>If you experience any technical difficulties or need to make changes to your appointment, please don't hesitate to contact us:</p>
+
+<ul>
+    <li><strong>Phone:</strong> <a href="tel:+254700000000">+254 700 000 000</a></li>
+    <li><strong>Email:</strong> <a href="mailto:info@innerserenity.co.ke">info@innerserenity.co.ke</a></li>
+    <li><strong>WhatsApp:</strong> <a href="https://wa.me/254700000000">Send us a message</a></li>
+</ul>
+
+<p>We look forward to connecting with you online and supporting you on your journey to inner peace and wellbeing.</p>
+
+<p>With warmth and compassion,<br>
+<strong>{{ counsellor }} and the Inner Serenity Team</strong></p>
+{% endblock %}

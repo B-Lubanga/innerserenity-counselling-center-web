@@ -1,0 +1,42 @@
+# Alembic Migrations
+
+This directory contains Alembic migration scripts for the Inner Serenity Counselling Centre database.
+
+## Running Migrations
+
+### Create a new migration
+```bash
+cd backend
+alembic revision --autogenerate -m "description of changes"
+```
+
+### Apply migrations
+```bash
+cd backend
+alembic upgrade head
+```
+
+### Rollback migrations
+```bash
+cd backend
+alembic downgrade -1
+```
+
+### View migration history
+```bash
+cd backend
+alembic history
+```
+
+### View current version
+```bash
+cd backend
+alembic current
+```
+
+## Environment Variables
+
+Ensure your `.env` file has the correct `DATABASE_URL` set:
+```
+DATABASE_URL=postgresql://user:password@localhost:5432/innerserenity
+```

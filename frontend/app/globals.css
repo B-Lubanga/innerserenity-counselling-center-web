@@ -1,0 +1,95 @@
+@import '../styles/tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 60 33% 96%;
+    --foreground: 75 5% 23%;
+    --card: 0 0% 100%;
+    --card-foreground: 75 5% 23%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 75 5% 23%;
+    --primary: 75 5% 23%;
+    --primary-foreground: 60 33% 96%;
+    --secondary: 82 26% 60%;
+    --secondary-foreground: 75 5% 23%;
+    --muted: 82 26% 92%;
+    --muted-foreground: 75 5% 45%;
+    --accent: 33 74% 54%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 60 10% 82%;
+    --input: 60 10% 82%;
+    --ring: 75 5% 23%;
+    --radius: 0.5rem;
+    --sidebar-background: 75 5% 23%;
+    --sidebar-foreground: 60 33% 96%;
+    --sidebar-primary: 33 74% 54%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 75 5% 30%;
+    --sidebar-accent-foreground: 60 33% 96%;
+    --sidebar-border: 75 5% 30%;
+    --sidebar-ring: 33 74% 54%;
+    --sidebar-width: 260px;
+    --sidebar-width-icon: 70px;
+    --chart-1: 33 74% 54%;
+    --chart-2: 82 26% 60%;
+    --chart-3: 75 5% 23%;
+    --chart-4: 60 33% 80%;
+    --chart-5: 75 5% 45%;
+  }
+
+  .dark {
+    --background: 75 5% 15%;
+    --foreground: 60 33% 96%;
+    --card: 75 5% 18%;
+    --card-foreground: 60 33% 96%;
+    --popover: 75 5% 18%;
+    --popover-foreground: 60 33% 96%;
+    --primary: 60 33% 96%;
+    --primary-foreground: 75 5% 23%;
+    --secondary: 82 26% 40%;
+    --secondary-foreground: 60 33% 96%;
+    --muted: 75 5% 25%;
+    --muted-foreground: 60 33% 70%;
+    --accent: 33 74% 54%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 60 33% 96%;
+    --border: 75 5% 28%;
+    --input: 75 5% 28%;
+    --ring: 33 74% 54%;
+    --sidebar-background: 75 5% 12%;
+    --sidebar-foreground: 60 33% 96%;
+    --sidebar-primary: 33 74% 54%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 75 5% 20%;
+    --sidebar-accent-foreground: 60 33% 96%;
+    --sidebar-border: 75 5% 20%;
+    --sidebar-ring: 33 74% 54%;
+    --sidebar-width: 260px;
+    --sidebar-width-icon: 70px;
+    --chart-1: 33 74% 54%;
+    --chart-2: 82 26% 50%;
+    --chart-3: 60 33% 80%;
+    --chart-4: 75 5% 60%;
+    --chart-5: 33 74% 40%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-ivory text-fern;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}

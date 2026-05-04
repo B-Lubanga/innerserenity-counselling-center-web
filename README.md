@@ -1,230 +1,222 @@
-# Inner Serenity Counselling Centre - Web Application
+# Inner Serenity Counselling Centre - Monorepo
 
-A modern, responsive counselling center website built with Next.js, TypeScript, and Tailwind CSS featuring real-time chat support, session booking with calendar integration, and smooth scroll animations.
-
-## Features
-
-### Core Features
-- **Professional Branding**: Elegant lotus logo and "Inner Serenity" branding throughout
-- **Responsive Design**: Mobile-first approach optimized for all device sizes
-- **Dark/Light Mode**: Theme toggle with persistent user preference
-- **Smooth Animations**: Framer Motion-powered scroll animations and page transitions
-
-### Pages
-- **Home**: Hero section with inspirational quotes carousel, services overview, mood tracker
-- **About**: Team profiles, mission/vision, core values, why choose us
-- **Services**: 6+ counselling services with pricing, duration, and booking links
-- **Resources**: Free mental health guides, workbooks, and educational materials
-- **Booking**: Full calendar with availability, time slot selection, and email confirmation
-- **Chat**: AI-powered customer support chat with context-aware responses
-- **Contact**: Contact information and message form
-
-### Functionality
-- **Smart Calendar**: Shows available/booked dates and times, prevents double-booking
-- **Email Integration**: Automatic booking confirmations via Resend
-- **AI Chat Support**: OpenAI-powered customer service with domain knowledge
-- **Form Validation**: Client-side and server-side validation
-- **Session Tracking**: Visual indicators for booking status
-
-## Technology Stack
-
-### Frontend
-- **Next.js 15+**: React framework with App Router
-- **TypeScript**: Type-safe development
-- **Tailwind CSS**: Utility-first styling
-- **Shadcn/UI**: Pre-built accessible components
-- **Framer Motion**: Advanced animations
-- **AI SDK**: Vercel AI SDK for chat functionality
-
-### Backend
-- **Next.js API Routes**: Serverless functions
-- **Resend**: Email service for confirmations
-- **OpenAI**: GPT-4o for chat intelligence
+A modern, responsive counselling center web application built as a monorepo with separate frontend, backend, and database management components.
 
 ## Project Structure
 
 ```
 .
-├── app/
-│   ├── layout.tsx              # Root layout with navbar/footer
-│   ├── page.tsx                # Home page
-│   ├── about/
-│   ├── services/
-│   ├── resources/
-│   ├── contact/
-│   ├── booking/
-│   ├── chat/
-│   └── api/
-│       ├── chat/route.ts       # Chat API endpoint
-│       └── email/
-│           └── send-confirmation/ # Email sending endpoint
-├── components/
-│   ├── navbar.tsx              # Navigation with active links
-│   ├── logo.tsx                # Lotus logo component
-│   ├── hero.tsx                # Hero section with animations
-│   ├── animated-scroll.tsx     # Scroll animation components
-│   └── ...other components
-├── lib/
-│   ├── constants.ts            # Centralized constants and data
-│   ├── types.ts                # TypeScript types
-│   ├── helpers.ts              # Utility functions
-│   ├── email.ts                # Email templates
-│   └── animations.ts           # Framer Motion variants
-├── public/                     # Static assets
-└── styles/                     # Global styles
-
+├── frontend/                  # Next.js 15+ frontend application
+│   ├── app/                   # Next.js App Router pages
+│   ├── components/            # React components
+│   ├── hooks/                 # Custom React hooks
+│   ├── lib/                   # Utility libraries
+│   ├── public/                # Static assets
+│   ├── styles/                # Global styles
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── tailwind.config.ts
+│   └── next.config.mjs
+│
+├── backend/                   # FastAPI Python backend
+│   ├── app/
+│   │   ├── main.py            # Application entry point
+│   │   ├── api/
+│   │   │   └── routes/       # API route handlers
+│   │   ├── models/           # SQLAlchemy models
+│   │   ├── schemas/          # Pydantic schemas
+│   │   ├── services/         # Business logic
+│   │   ├── core/
+│   │   │   ├── config.py     # Configuration
+│   │   │   └── security.py   # Authentication
+│   │   └── db/
+│   │       ├── session.py     # Database session
+│   │       └── base.py        # Base model
+│   ├── alembic/               # Database migrations
+│   ├── requirements.txt
+│   ├── .env.example
+│   └── README.md
+│
+├── database/                  # Database management
+│   ├── migrations/            # Alembic migration files
+│   ├── seeds/                 # Seed scripts
+│   ├── export/
+│   │   └── export_db.py      # Export to JSON/CSV
+│   ├── import/
+│   │   └── import_db.py      # Import from JSON/CSV
+│   ├── schema.sql             # SQL schema dump
+│   └── README.md
+│
+├── docker-compose.yml         # Docker orchestration
+├── .gitignore
+└── README.md
 ```
 
-## Getting Started
+## Quick Start with Docker
 
 ### Prerequisites
-- Node.js 18+
-- npm or yarn
+- Docker and Docker Compose installed
 
-### Installation
+### Running the Application
 
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd inner-serenity
+cd innerserenity-counselling-center-web
 ```
 
-2. Install dependencies:
+2. Start all services:
 ```bash
+docker-compose up --build
+```
+
+3. Access the applications:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8000
+- API Docs (Swagger): http://localhost:8000/docs
+- PostgreSQL: localhost:5432
+
+## Manual Setup
+
+### Frontend (Next.js)
+
+```bash
+cd frontend
 npm install
+npm run dev
 ```
 
-3. Set up environment variables:
+Visit http://localhost:3000
+
+### Backend (FastAPI)
+
 ```bash
-cp .env.example .env.local
+cd backend
+pip install -r requirements.txt
+cp .env.example .env
+# Edit .env with your configuration
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-Edit `.env.local` with your API keys:
+Visit http://localhost:8000/docs for API documentation
+
+### Database
+
+The database is managed via PostgreSQL. See `database/README.md` for:
+- Export/import utilities
+- Migration management
+- Seeding initial data
+
+## Features
+
+### Frontend
+- **Professional Branding**: Elegant lotus logo and "Inner Serenity" branding
+- **Responsive Design**: Mobile-first approach for all devices
+- **Dark/Light Mode**: Theme toggle with persistent preference
+- **Smooth Animations**: Framer Motion-powered transitions
+- **Pages**: Home, About, Services, Resources, Booking, Chat, Contact
+- **Admin Dashboard**: Calendar, clients, invoices, sessions management
+
+### Backend
+- **RESTful API**: FastAPI with automatic OpenAPI documentation
+- **Authentication**: JWT-based admin authentication
+- **Database**: PostgreSQL with SQLAlchemy ORM
+- **Migrations**: Alembic for database version control
+- **Routes**: Bookings, clients, invoices, sessions, quotes, messaging, admin
+
+## Technology Stack
+
+### Frontend
+- Next.js 15+ (App Router)
+- TypeScript
+- Tailwind CSS
+- Shadcn/UI components
+- Framer Motion
+
+### Backend
+- FastAPI
+- Python 3.11+
+- SQLAlchemy
+- PostgreSQL
+- Alembic
+- Pydantic
+
+## Environment Variables
+
+### Frontend (.env.local)
 ```
+NEXT_PUBLIC_API_URL=http://localhost:8000
 OPENAI_API_KEY=sk-...
 RESEND_API_KEY=re_...
 ```
 
-4. Run development server:
-```bash
-npm run dev
+### Backend (.env)
 ```
-
-Visit `http://localhost:3000`
-
-## Configuration
-
-### Available Constants
-Edit `/lib/constants.ts` to customize:
-- Center name, contact info, hours
-- Services and pricing
-- Mock availability dates
-- Booked time slots
-
-### Email Templates
-Modify `/lib/email.ts` to customize:
-- Email subject lines
-- Booking confirmation content
-- Email styling
-
-## Testing
-
-### Manual Testing
-See `/TESTING.md` for comprehensive test checklist covering:
-- Navigation and routing
-- Animations and transitions
-- Booking system
-- Chat functionality
-- Email integration
-- Responsive design
-
-### Automated Testing
-```bash
-node scripts/verify-setup.js  # Verify all files exist
+DATABASE_URL=postgresql://user:password@localhost:5432/innerserenity
+SECRET_KEY=your-secret-key-here
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+FRONTEND_URL=http://localhost:3000
+API_V1_PREFIX=/api
 ```
-
-## Performance Optimizations
-
-- Images use `next/image` for optimization
-- Components use `React.memo` where appropriate
-- Animations are GPU-accelerated with Framer Motion
-- API routes are optimized with streaming responses
-- Tailwind CSS is tree-shaken for minimal bundle size
-
-## Accessibility
-
-- WCAG 2.1 AA compliant color contrast
-- Semantic HTML structure
-- ARIA labels and roles
-- Keyboard navigation support
-- Screen reader friendly
-
-## Browser Support
-
-- Chrome/Edge: Latest 2 versions
-- Firefox: Latest 2 versions
-- Safari: Latest 2 versions
-- Mobile browsers: iOS Safari 12+, Chrome Android latest
-
-## Deployment
-
-### Vercel (Recommended)
-```bash
-npm install -g vercel
-vercel
-```
-
-### Other Platforms
-1. Build: `npm run build`
-2. Start: `npm run start`
-
-Set environment variables on your hosting platform.
 
 ## API Documentation
 
-### POST /api/chat
-Streams chat responses using AI SDK.
+Once the backend is running, visit:
+- Swagger UI: http://localhost:8000/docs
+- ReDoc: http://localhost:8000/redoc
 
-**Request:**
-```json
-{
-  "messages": [
-    { "role": "user", "content": "Can I book a session?" }
-  ]
-}
+### Available Endpoints
+- `POST /api/bookings` - Create/update bookings
+- `GET /api/clients` - Manage clients
+- `GET /api/invoices` - Invoice management
+- `GET /api/sessions` - Therapy sessions
+- `GET /api/quotes` - Inspirational quotes
+- `POST /api/messaging` - Messaging system
+- `POST /api/admin/login` - Admin authentication
+
+## Database Management
+
+### Export Database
+```bash
+cd database
+python export/export_db.py
 ```
 
-**Response:** Streaming text response
-
-### POST /api/email/send-confirmation
-Sends booking confirmation email.
-
-**Request:**
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "date": "2026-03-10T10:00:00Z",
-  "time": "10:00 AM",
-  "sessionType": "virtual"
-}
+### Import Database
+```bash
+cd database
+python import/import_db.py --format json
 ```
 
-**Response:**
-```json
-{
-  "success": true,
-  "message": "Confirmation email sent successfully"
-}
+### Run Migrations
+```bash
+cd backend
+alembic upgrade head
 ```
 
-## Contributing
+## Development
 
-Guidelines for contributing:
-1. Follow existing code style
-2. Use TypeScript for type safety
-3. Add tests for new features
-4. Update documentation
+### Frontend Development
+```bash
+cd frontend
+npm run dev          # Start dev server
+npm run build        # Build for production
+npm run start        # Start production server
+```
+
+### Backend Development
+```bash
+cd backend
+uvicorn app.main:app --reload  # Start dev server
+```
+
+## Documentation
+
+- `frontend/` - Frontend-specific documentation in its README
+- `backend/README.md` - Backend API documentation
+- `database/README.md` - Database management guide
+- Various `.md` files in root for project history (implementation guides, etc.)
 
 ## License
 
@@ -236,23 +228,6 @@ For issues or questions:
 - Email: support@innerserenity.com
 - Phone: +1 (555) 123-4567
 - Hours: Mon-Fri 9AM-7PM, Sat 10AM-4PM
-
-## Troubleshooting
-
-### Chat not responding
-- Verify `OPENAI_API_KEY` is set
-- Check OpenAI account has available credits
-- Review browser console for errors
-
-### Emails not sending
-- Verify `RESEND_API_KEY` is set
-- Check email address is valid
-- Review `/app/api/email/send-confirmation/route.ts`
-
-### Animations not smooth
-- Check browser hardware acceleration is enabled
-- Disable browser extensions
-- Try a different browser
 
 ---
 
